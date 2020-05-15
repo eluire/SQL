@@ -1,6 +1,4 @@
 -- Criando o tipo região
--- @block create regiao type
--- @conn dev
 CREATE TYPE type_regiao AS ENUM(
   'Norte',
   'Nordeste',
@@ -11,7 +9,6 @@ CREATE TYPE type_regiao AS ENUM(
 --opção de dropar a tabela
 DROP TABLE estados;
 -- Criando tabela estado
--- @block create estados table
 CREATE TABLE public.estados (
   id SERIAL,
   nome character varying(45) NOT NULL,
@@ -22,3 +19,19 @@ CREATE TABLE public.estados (
   UNIQUE (nome),
   UNIQUE (sigla)
 );
+create table public.cidades (
+  id serial,
+  nome character varying(255) NOT NULL,
+  estado_id integer NOT NULL,
+  area numeric,
+  PRIMARY KEY(id),
+  FOREIGN KEY (estado_id) REFERENCES estados (id)
+);
+create table public.prefeitos (
+  id serial,
+  nome character varying(255) NOT NULL,
+  cidade_id integer,
+  PRIMARY KEY(id),
+  UNIQUE (cidade_id),
+  FOREIGN KEY (cidade_id) REFERENCES cidades (id)
+)

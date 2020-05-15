@@ -1,3 +1,4 @@
+--EXEMPLOS DE INSERTS
 INSERT INTO estados (nome, sigla, regiao, populacao)
 VALUES
   ('Alagoas', 'AL', 'Nordeste', 3.38),
@@ -25,3 +26,77 @@ VALUES
   ('São Paulo', 'SP', 'Sudeste', 45.10),
   ('Sergipe', 'SE', 'Nordeste', 2.29),
   ('Tocantins', 'TO', 'Norte', 1.55);
+insert into cidades (nome, area, estado_id)
+values
+  (
+    'Juazeiro do Norte',
+    248.2,
+    (
+      select
+        id
+      from estados
+      where
+        sigla = 'CE'
+    )
+  ),
+  (
+    'Campinas',
+    795,
+    (
+      select
+        id
+      from estados
+      where
+        sigla = 'SP'
+    )
+  ),
+  (
+    'Niteroi',
+    133.9,
+    (
+      select
+        id
+      from estados
+      where
+        sigla = 'RJ'
+    )
+  ),
+  (
+    'Caruarú',
+    920.6,
+    (
+      select
+        id
+      from estados
+      where
+        sigla = 'PE'
+    )
+  );
+insert into prefeitos (nome, cidade_id)
+values
+  (
+    'Rodrigo Neves',
+    (
+      select
+        id
+      from cidades
+      where
+        nome = 'Niteroi'
+    )
+  ),
+  (
+    'Raquel Lira',
+    (
+      select
+        id
+      from cidades
+      where
+        nome = 'Caruarú'
+    )
+  ),
+  ('Zenaldo Coutinho', null);
+select
+  id
+from cidades
+where
+  nome = 'Niteroi'
