@@ -100,3 +100,14 @@ select
 from cidades
 where
   nome = 'Niteroi'
+INSERT INTO empresas (nome, cnpj)
+VALUES
+  ('Bradesco', 95694186000132),
+  ('Vale', 27887148000146),
+  ('Cielo', 01598317000134);
+INSERT INTO empresas_unidades (empresa_id, cidade_id, sede)
+VALUES
+  (1, 1, 't'),
+  (1, 2, 'f'),
+  (2, 1, 'f'),
+  (2, 2, 't');

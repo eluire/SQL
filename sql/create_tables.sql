@@ -34,4 +34,19 @@ create table public.prefeitos (
   PRIMARY KEY(id),
   UNIQUE (cidade_id),
   FOREIGN KEY (cidade_id) REFERENCES cidades (id)
+);
+create table public.empresas (
+  id serial,
+  nome character varying(255) NOT NULL,
+  cnpj integer,
+  primary key(id),
+  unique (cnpj)
+);
+drop table empresas_unidades create table public.empresas_unidades (
+  empresa_id integer not null,
+  cidade_id integer not null,
+  sede boolean,
+  primary key (empresa_id, cidade_id),
+  foreign key (empresa_id) references empresas (id),
+  foreign key (cidade_id) references cidades (id)
 )
